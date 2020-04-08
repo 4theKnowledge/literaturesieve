@@ -127,3 +127,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+# Working Files and Folders
+*.xlsx
+*.csv
+*.txt
+*.gz
+/data/docs_w_kt_matches
+/data/s2
