@@ -50,10 +50,9 @@ def convertToJson(file):
             file = re.sub('\w"s', '', file)  # cant apply to cleanDocQuotes as it's not at the right transformation (problem occurs with docs like: "Textual Silence and (Male) Homosexual Panic in Nuria Amat"s La intimidad (1997)")
             docJSON = json.loads(file)
             return docJSON
-        
         except Exception as e:
-            print(f'ERROR: {e}')
-            print(file)
+            # print(f'ERROR: {e}')
+            # print(file)
             pass
 
 
@@ -62,7 +61,7 @@ def extractContents():
 
 
 def main():
-    directory = r"C:\Users\22917746\Desktop\Semantic Scholar EDA\keyterm matched all"
+    directory = r"C:\Users\22917746\Desktop\UWA repos\PHD\literaturesieve\data\docs_w_kt_matches"
 
     compSciTitleYearDict = {}
     otherFieldsDict = {}
@@ -73,7 +72,7 @@ def main():
 
     docsProcessed = 0
     filesProcessed = 0
-    fileLimit = 100
+    fileLimit = 20000
 
     for filename in os.listdir(directory):
         if filename.endswith(".txt"):
@@ -122,8 +121,8 @@ def main():
                                     otherFieldsCount += 1
 
                             except Exception as e:
-                                print(e)
-                                print(docContents)
+                                # print(e)
+                                # print(docContents)
                                 pass
 
                         else:       # standard document, doesn't have special stuff in it.
@@ -146,14 +145,14 @@ def main():
                                     otherFieldsCount += 1
 
                             except Exception as e:
-                                print(e)
-                                print(docContents)
+                                # print(e)
+                                # print(docContents)
                                 pass
 
                     docsProcessed += 1
                 except Exception as e:
-                    print('FINAL EXCEPTION')
-                    print(e)
+                    # print('FINAL EXCEPTION')
+                    # print(e)
                     pass
 
             filesProcessed += 1
@@ -169,10 +168,10 @@ def main():
     print(f'Processed {docsProcessed} Documents | Comp. Sci. {compSciCount} | Other {otherFieldsCount} | Non-English {nonEnglishCount} || Not Captured {docsProcessed-compSciCount-otherFieldsCount-nonEnglishCount}')
 
     papersOfInterstDataFrame = pd.DataFrame.from_dict(compSciTitleYearDict)
-    papersOfInterstDataFrame.T.to_csv('papers_of_interest.csv')
+    papersOfInterstDataFrame.T.to_csv(r'../bin/papers_of_interest.csv')
 
     papersNOTOfInterstDataFrame = pd.DataFrame.from_dict(otherFieldsDict)
-    papersNOTOfInterstDataFrame.T.to_csv('papers_NOT_of_interest.csv')
+    papersNOTOfInterstDataFrame.T.to_csv(r'../bin/papers_NOT_of_interest.csv')
 
 if __name__ == '__main__':
     main()
